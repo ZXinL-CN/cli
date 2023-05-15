@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clone": "node ./bin/projectCloning.js",
+    "plop": "plop"
   },
   "repository": {
     "type": "git",
     "url": "https://gitee.com/xinlone/basic-cli.git"
   },
   "author": "xinl",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "plop": "^3.1.2",
+    "shelljs": "^0.8.5"
+  }
 }
