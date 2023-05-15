@@ -1,11 +1,14 @@
 {
-  "name": "basic-cli",
+  "name": "@xinliang/basic-cli",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "clone": "node ./bin/projectCloning.js",
-    "plop": "plop"
+    "clone": "node ./bin/projectCloning.js"
+  },
+  "bin": {
+    "basic-cli": "./index.js"
   },
   "repository": {
     "type": "git",
@@ -14,7 +17,7 @@
   "author": "xinl",
   "license": "ISC",
   "devDependencies": {
-    "plop": "^3.1.2",
+    "chalk": "^5.2.0",
     "shelljs": "^0.8.5"
   }
 }

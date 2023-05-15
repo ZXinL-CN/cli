@@ -1,4 +1,4 @@
-const shell = require('shelljs');
+import shell from 'shelljs';
 
 // Clear the project directory if it exists
 if (shell.test('-d', 'project')) {
