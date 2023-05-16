@@ -2,13 +2,25 @@
   "name": "@xinliang/basic-cli",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "clone": "node ./bin/projectCloning.js"
+    "build": "npx unbuild",
+    "clone": "node ./bin/index.ts"
   },
   "bin": {
-    "basic-cli": "./index.js"
+    "basic-cli": "./bin/index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,7 +29,13 @@
   "author": "xinl",
   "license": "ISC",
   "devDependencies": {
-    "chalk": "^5.2.0",
-    "shelljs": "^0.8.5"
+    "@types/cross-spawn": "^6.0.2",
+    "@types/minimist": "^1.2.2",
+    "@types/prompts": "^2.4.4",
+    "cross-spawn": "^7.0.3",
+    "kolorist": "^1.8.0",
+    "minimist": "^1.2.8",
+    "prompts": "^2.4.2",
+    "unbuild": "^1.2.1"
   }
 }
