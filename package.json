@@ -17,7 +17,8 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "clone": "node ./bin/index.ts"
+    "clone": "node ./dist/index.js",
+    "dev": "node test.js"
   },
   "bin": {
     "basic-cli": "./bin/index.ts"

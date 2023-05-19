@@ -1,7 +1,7 @@
 {
-    "include": ["build.config.ts", "src", "__tests__"],
+    "include": ["bin/**/*","build.config.ts", "src", "__tests__"],
     "compilerOptions": {
-      "outDir": "dist",
+      "outDir": "dist/",
       "target": "ESNext",
       "module": "ESNext",
       "moduleResolution": "node",

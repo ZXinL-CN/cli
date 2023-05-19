@@ -38,23 +38,6 @@ type FrameworkVariant = {
 
 const FRAMEWORKS: Framework[] = [
   {
-    name: 'vanilla',
-    display: 'Vanilla',
-    color: yellow,
-    variants: [
-      {
-        name: 'vanilla-ts',
-        display: 'TypeScript',
-        color: blue,
-      },
-      {
-        name: 'vanilla',
-        display: 'JavaScript',
-        color: yellow,
-      },
-    ],
-  },
-  {
     name: 'vue',
     display: 'Vue',
     color: green,
@@ -84,105 +67,14 @@ const FRAMEWORKS: Framework[] = [
     ],
   },
   {
-    name: 'react',
-    display: 'React',
-    color: cyan,
+    name: 'basic',
+    display: 'Basic',
+    color: green,
     variants: [
       {
-        name: 'react-ts',
+        name: 'basic',
         display: 'TypeScript',
         color: blue,
-      },
-      {
-        name: 'react-swc-ts',
-        display: 'TypeScript + SWC',
-        color: blue,
-      },
-      {
-        name: 'react',
-        display: 'JavaScript',
-        color: yellow,
-      },
-      {
-        name: 'react-swc',
-        display: 'JavaScript + SWC',
-        color: yellow,
-      },
-    ],
-  },
-  {
-    name: 'preact',
-    display: 'Preact',
-    color: magenta,
-    variants: [
-      {
-        name: 'preact-ts',
-        display: 'TypeScript',
-        color: blue,
-      },
-      {
-        name: 'preact',
-        display: 'JavaScript',
-        color: yellow,
-      },
-    ],
-  },
-  {
-    name: 'lit',
-    display: 'Lit',
-    color: lightRed,
-    variants: [
-      {
-        name: 'lit-ts',
-        display: 'TypeScript',
-        color: blue,
-      },
-      {
-        name: 'lit',
-        display: 'JavaScript',
-        color: yellow,
-      },
-    ],
-  },
-  {
-    name: 'svelte',
-    display: 'Svelte',
-    color: red,
-    variants: [
-      {
-        name: 'svelte-ts',
-        display: 'TypeScript',
-        color: blue,
-      },
-      {
-        name: 'svelte',
-        display: 'JavaScript',
-        color: yellow,
-      },
-      {
-        name: 'custom-svelte-kit',
-        display: 'SvelteKit ↗',
-        color: red,
-        customCommand: 'npm create svelte@latest TARGET_DIR',
-      },
-    ],
-  },
-  {
-    name: 'others',
-    display: 'Others',
-    color: reset,
-    variants: [
-      {
-        name: 'create-vite-extra',
-        display: 'create-vite-extra ↗',
-        color: reset,
-        customCommand: 'npm create vite-extra@latest TARGET_DIR',
-      },
-      {
-        name: 'create-electron-vite',
-        display: 'create-electron-vite ↗',
-        color: reset,
-        customCommand: 'npm create electron-vite@latest TARGET_DIR',
       },
     ],
   },
@@ -313,9 +205,9 @@ async function init() {
     template = template.replace('-swc', '')
   }
 
-  const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent)
+  const pkgInfo = pkgFromUserAgent(process.env.npm_config_user_agent) // 获取包管理器信息
   const pkgManager = pkgInfo ? pkgInfo.name : 'npm'
-  const isYarn1 = pkgManager === 'yarn' && pkgInfo?.version.startsWith('1.')
+  const isYarn1 = pkgManager === 'yarn' && pkgInfo?.version.startsWith('1.') // 包管理器是否为 Yarn v1 版本
 
   const { customCommand } =
     FRAMEWORKS.flatMap((f) => f.variants).find((v) => v.name === template) ?? {}
@@ -390,6 +282,8 @@ async function init() {
       }`,
     )
   }
+
+  // 项目创建成功，输出提示信息
   switch (pkgManager) {
     case 'yarn':
       console.log('  yarn')
@@ -403,12 +297,22 @@ async function init() {
   console.log()
 }
 
+/**
+ * @description 格式化目标路径：删除路径字符串中的空格和末尾的斜杠
+ * @param targetDir 
+ * @returns 
+ */
 function formatTargetDir(targetDir: string | undefined) {
   return targetDir?.trim().replace(/\/+$/g, '')
 }
 
+/**
+ * @description 复制文件及文件夹
+ * @param src 
+ * @param dest 
+ */
 function copy(src: string, dest: string) {
-  const stat = fs.statSync(src)
+  const stat = fs.statSync(src) // 获取目标路径信息的统计数据
   if (stat.isDirectory()) {
     copyDir(src, dest)
   } else {
@@ -416,12 +320,22 @@ function copy(src: string, dest: string) {
   }
 }
 
+/**
+ * @description 检验是否为有效的 package 名称
+ * @param projectName 
+ * @returns 
+ */
 function isValidPackageName(projectName: string) {
   return /^(?:@[a-z\d\-*~][a-z\d\-*._~]*\/)?[a-z\d\-~][a-z\d\-._~]*$/.test(
     projectName,
   )
 }
 
+/**
+ * @description 转换为有效的 package 名称
+ * @param projectName 
+ * @returns 
+ */
 function toValidPackageName(projectName: string) {
   return projectName
     .trim()
@@ -431,8 +345,13 @@ function toValidPackageName(projectName: string) {
     .replace(/[^a-z\d\-~]+/g, '-')
 }
 
+/**
+ * @description 复制文件夹
+ * @param srcDir 
+ * @param destDir 
+ */
 function copyDir(srcDir: string, destDir: string) {
-  fs.mkdirSync(destDir, { recursive: true })
+  fs.mkdirSync(destDir, { recursive: true }) // 递归创建文件夹
   for (const file of fs.readdirSync(srcDir)) {
     const srcFile = path.resolve(srcDir, file)
     const destFile = path.resolve(destDir, file)
@@ -440,23 +359,38 @@ function copyDir(srcDir: string, destDir: string) {
   }
 }
 
+/**
+ * @description 判断是否为空目录
+ * @param path 
+ * @returns 
+ */
 function isEmpty(path: string) {
   const files = fs.readdirSync(path)
   return files.length === 0 || (files.length === 1 && files[0] === '.git')
 }
 
+/**
+ * @description 清空目录
+ * @param dir 
+ * @returns 
+ */
 function emptyDir(dir: string) {
-  if (!fs.existsSync(dir)) {
+  if (!fs.existsSync(dir)) { // 如果路径不存在
     return
   }
   for (const file of fs.readdirSync(dir)) {
     if (file === '.git') {
       continue
     }
-    fs.rmSync(path.resolve(dir, file), { recursive: true, force: true })
+    fs.rmSync(path.resolve(dir, file), { recursive: true, force: true }) // 强制递归删除文件和目录
   }
 }
 
+/**
+ * @description 解析包管理器（npm、yarn）的用户代理字符串
+ * @param userAgent 
+ * @returns 
+ */
 function pkgFromUserAgent(userAgent: string | undefined) {
   if (!userAgent) return undefined
   const pkgSpec = userAgent.split(' ')[0]
@@ -467,6 +401,11 @@ function pkgFromUserAgent(userAgent: string | undefined) {
   }
 }
 
+/**
+ * @description 针对 react-swc 进行处理
+ * @param root 
+ * @param isTs 
+ */
 function setupReactSwc(root: string, isTs: boolean) {
   editFile(path.resolve(root, 'package.json'), (content) => {
     return content.replace(
@@ -482,6 +421,11 @@ function setupReactSwc(root: string, isTs: boolean) {
   )
 }
 
+/**
+ * @description 编辑文件内容
+ * @param file 
+ * @param callback 
+ */
 function editFile(file: string, callback: (content: string) => string) {
   const content = fs.readFileSync(file, 'utf-8')
   fs.writeFileSync(file, callback(content), 'utf-8')
