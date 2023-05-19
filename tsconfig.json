@@ -1,16 +1,10 @@
 {
-    "include": ["bin/**/*","build.config.ts", "src", "__tests__"],
-    "compilerOptions": {
-      "outDir": "dist/",
-      "target": "ESNext",
-      "module": "ESNext",
-      "moduleResolution": "node",
-      "strict": true,
-      "skipLibCheck": true,
-      "declaration": false,
-      "sourceMap": true,
-      "noUnusedLocals": false,
-      "noUnusedParameters": false,
-      "esModuleInterop": true
-    }
+  "compilerOptions": {
+    "module": "ESNext", // or ES2015, ES2020
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution":"node",
+  },
+  "ts-node": {
+    "esm": true
   }
+}
