@@ -1,8 +1,11 @@
 {
+  "include": ["./bin"],
   "compilerOptions": {
     "module": "ESNext", // or ES2015, ES2020
     "allowSyntheticDefaultImports": true,
     "moduleResolution":"node",
+    "esModuleInterop": true,
+    "outDir": "dist"
   },
   "ts-node": {
     "esm": true

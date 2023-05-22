@@ -1,5 +1,5 @@
 {
-  "name": "@xinliang/basic-cli",
+  "name": "@xinliang/create-cli",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.cjs",
@@ -21,7 +21,7 @@
     "dev": "node test.js"
   },
   "bin": {
-    "basic-cli": "./bin/index.ts"
+    "create-cli": "./dist/index.js"
   },
   "repository": {
     "type": "git",
