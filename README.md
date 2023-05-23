@@ -4,7 +4,7 @@
 
 With NPM:
 
-``$ npm create @xinliang/cli``
+``$ npm create @xinliang/cli@latest``
 
 With Yarn:
 
@@ -20,10 +20,10 @@ With PNPM:
 
 ```
 # npm 6.x
-npm create @xinliang/cli my-vue-app --template vue3-ts
+npm create @xinliang/cli@latest my-vue-app --template vue3-ts
 
 # npm 7+, extra double-dash is needed:
-npm create @xinliang/cli my-vue-app -- --template vue3-ts
+npm create @xinliang/cli@latest my-vue-app -- --template vue3-ts
 
 # yarn
 yarn create @xinliang/cli my-vue-app --template vue3-ts
