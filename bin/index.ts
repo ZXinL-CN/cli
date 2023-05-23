@@ -40,12 +40,12 @@ type FrameworkVariant = {
 
 const FRAMEWORKS: Framework[] = [
   {
-    name: 'vue',
-    display: 'Vue',
+    name: 'vue3',
+    display: 'Vue3',
     color: green,
     variants: [
       {
-        name: 'vue-ts',
+        name: 'vue3-ts',
         display: 'TypeScript',
         color: blue,
       }

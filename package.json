@@ -17,8 +17,7 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "clone": "node ./dist/index.cjs",
-    "dev": "node test.js"
+    "dev": "node ./dist/index.cjs"
   },
   "bin": {
     "create-cli": "./dist/index.cjs"
