@@ -1,6 +1,6 @@
 {
   "name": "@xinliang/create-cli",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -13,7 +13,7 @@
     }
   },
   "files": [
-    "template-*",
+    "template-*/**",
     "dist"
   ],
   "scripts": {
