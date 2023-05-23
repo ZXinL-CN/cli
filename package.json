@@ -17,11 +17,11 @@
   ],
   "scripts": {
     "build": "unbuild",
-    "clone": "node ./dist/index.js",
+    "clone": "node ./dist/index.cjs",
     "dev": "node test.js"
   },
   "bin": {
-    "create-cli": "./dist/index.js"
+    "create-cli": "./dist/index.cjs"
   },
   "repository": {
     "type": "git",
